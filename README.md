@@ -1,5 +1,7 @@
 # Getting Started
 
+The first step is to install Rust and system dependencies
+
 ## Setting up Windows
 
 1. Microsoft Visual Studio C++ Build Tools
@@ -19,7 +21,7 @@
 
 ## Setting Up Linux
 
-1. System Dependencies
+System Dependencies
 
 ```bash
 sudo apt update
