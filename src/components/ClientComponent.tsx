@@ -7,9 +7,8 @@ const Print = dynamic(
   () => import("@/components/Print").then((mod) => mod.Print),
   { ssr: false }
 );
-export const WrapComponent = () => {
+export const ClientComponent = () => {
   const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
     setIsClient(true);
   }, []);

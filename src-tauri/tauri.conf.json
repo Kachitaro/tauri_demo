@@ -73,10 +73,8 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
         "resizable": true,
-        "title": "Nextjs DEMO",
-        "width": 800
+        "title": "Nextjs DEMO"
       }
     ]
   }

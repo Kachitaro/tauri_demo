@@ -2,67 +2,59 @@
 import { Button } from "@/components/ui";
 import { useState } from "react";
 import * as PrintPlugin from "tauri-plugin-printer";
+import {
+  PrintData,
+  PrintFileOptions,
+} from "tauri-plugin-printer/dist/lib/types";
 
 export function Print() {
   const [printers, setPrinters] = useState<Array<any>>();
-  const data = [
+  const data: PrintData[] = [
     {
-      type: "text", // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
-      value: "SAMPLE HEADING",
-      style: { fontWeight: "700", textAlign: "center", fontSize: "24px" },
-    },
-    {
-      type: "text", // 'text' | 'barCode' | 'qrCode' | 'image' | 'table'
-      value: "Secondary text",
-      style: {
-        textDecoration: "underline",
-        fontSize: "10px",
-        textAlign: "center",
-        color: "red",
-      },
-    },
-    {
-      type: "barCode",
-      value: "023456789010",
-      height: 40, // height of barcode, applicable only to bar and QR codes
-      width: 2, // width of barcode, applicable only to bar and QR codes
-      displayValue: true, // Display value below barcode
-      fontsize: 12,
+      type: "text",
+      value: "Nguyễn Anh Tài",
+      style: { fontSize: "5px" },
+      position: "center",
     },
     {
       type: "table",
-      // style the table
-      style: { border: "1px solid #ddd" },
-      // list of the columns to be rendered in the table header
+      style: { fontSize: "6px" },
       tableHeader: ["Animal", "Age"],
-      // multi dimensional array depicting the rows and columns of the table body
       tableBody: [
-        ["Tài Nguyễn", 2],
-        ["Đạt Phạm", 4],
-        ["Canh Riêu Cua", 12],
-        ["Heo Mọi", 4],
+        ["Tài Nguyễn", "2"],
+        ["Đạt Phạm", "4"],
+        ["Cơm chiên dương châu", "50vnd"],
       ],
-      // list of columns to be rendered in the table footer
-      tableFooter: ["Animal", "Age"],
-      // custom style for the table header
-      tableHeaderStyle: { backgroundColor: "#000", color: "white" },
-      // custom style for the table body
-      tableBodyStyle: { border: "0.5px solid #ddd" },
-      // custom style for the table footer
-      tableFooterStyle: { backgroundColor: "#000", color: "white" },
     },
   ];
   const option: any = {
     id: printers?.[0]?.id ?? "",
-    page_size: {
-      width: 300,
-      height: 300,
-    },
+    // page_size: {
+    //   width: 400,
+    //   height: 300,
+    // },
+    // print_setting: {
+    //   orientation: "landscape",
+    //   method: "simplex",
+    //   paper: "A6",
+    //   scale: "noscale",
+    //   // repeat: 1,
+    //   // range: {
+    //   //   from: 1,
+    //   //   to: 1,
+    //   // },
+    // },
+    // remove_temp: true,
+  };
+  const optFile: PrintFileOptions = {
+    id: printers?.[0]?.id ?? "",
+    name: "Bill",
+    path: "C:/download.pdf",
     print_setting: {
-      orientation: "landscape",
+      orientation: "portrait",
       method: "simplex",
       paper: "A6",
-      scale: "noscale",
+      scale: "shrink",
       repeat: 1,
       range: {
         from: 1,
@@ -82,8 +74,9 @@ export function Print() {
   };
   const handlePrintTest = async () => {
     try {
-      //@ts-ignore
       await PrintPlugin.print(data, option);
+      // await PrintPlugin.print_file(optFile);
+      console.log("Da in");
     } catch (error) {
       console.log("get printers error...", error);
     }
